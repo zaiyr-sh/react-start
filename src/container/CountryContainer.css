@@ -1,0 +1,35 @@
+img {
+	width: 100%;
+}
+
+body{
+    background: url("../component/images/light_blue_web_background.jpg") center repeat;
+}
+
+.Cell {
+	float: left;
+	width: 15%;
+	height: 0;
+	padding-bottom: 15%;
+	margin: 1%;
+	background: linear-gradient(to right, #dec0cb, #bbb918);
+	box-sizing: border-box;
+	align-items: center;
+	text-align: center;
+	font-weight: 400;
+	font-size: 20px;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.Cell--main{
+    bottom: 50%;
+    background: linear-gradient(to right, #5a7998, #9e96a9);
+}
+
+p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+    color: #444443;
+}
