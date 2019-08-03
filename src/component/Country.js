@@ -17,13 +17,13 @@ class Country extends React.Component {
 					<div id="myModal" className="modal">
 						<div className="modal-content">
 							<span onClick={this.toggleShow} className="close">&times;</span>
-							<img className="imgFlag" src={this.props.data.flag}></img>
+							<img className="imgFlag" src={this.props.data.flag} alt={this.props.data.name}></img>
 							<div className="countryData">
 								<div><strong>Region:</strong> {this.props.data.region}</div>
 								<div><strong>Subregion:</strong> {this.props.data.subregion}</div>
 								<div><strong>Language:</strong> {this.props.data.languages[0].name}</div>
 								<div><strong>Language Native Name:</strong> {this.props.data.languages[0].nativeName} </div>
-								<div><strong>Time Zone:</strong> {this.props.data.timezones} </div>
+								{/* <div><strong>Time Zone:</strong> {this.props.data.timezones} </div> */}
 								<div><strong>Calling Code:</strong> {this.props.data.callingCodes}</div>
 								<div><strong>Top Level Domain:</strong> {this.props.data.topLevelDomain}</div>
 							</div>
@@ -34,12 +34,13 @@ class Country extends React.Component {
 		}
 		return (
 			<>
-			<body>
+			
 			{modal()}
 			
 			<div className="Table">	
 				<div className="Row">
-					<div className="Cell">
+
+					<div className="Cell">						
 						<p>{this.props.data.alpha2Code}</p>
 						<button onClick={this.props.deleteCountryFunc}>Delete</button>
 						<button id="myBtn" onClick={this.toggleShow}>Open Modal</button>
@@ -56,9 +57,11 @@ class Country extends React.Component {
 					<div className="Cell">
 						<p>{this.props.data.population} people</p>
 					</div>
+					
 				</div>
 			</div>	
-			</body>
+			
+			
 			</>
 		);
 	}

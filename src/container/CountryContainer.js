@@ -3,8 +3,23 @@ import Country from '../component/Country';
 import './CountryContainer.css';
 
 class CountryContainer extends Component {
-	state = {
-		data: []
+	// state = {
+	// 	data: [],
+	// 	nameCountry: ""
+		
+	// };
+
+	constructor(){
+		super();
+		this.state = {
+			data: [],
+			nameCountry: '',
+			
+		};
+	}
+	
+	handleNameChange = (event) => {
+		this.setState({ nameCountry: event.target.value });
 	};
 
 	componentWillMount = () => {
@@ -19,6 +34,12 @@ class CountryContainer extends Component {
 		dataCountry.splice(index,1);
 		this.setState({data: dataCountry})
 	}
+
+	onSubmit(e) {
+        e.preventDefault();
+        var title = this.title;
+        console.log(title);
+    }
 
 	render() {
 		return (
@@ -42,12 +63,42 @@ class CountryContainer extends Component {
 					</div>
 				</div>
 
-				{this.state.data.map((item, index) => <Country deleteCountryFunc={() => this.deleteCountry(index)} key={index} data={item} />)}
-				
-				<input id="country-name" value={this.state.value} type="text" />
-				<button id="show" value="Submit">
-					Show information
-				</button>
+				{this.state.data.map((item, index) => {
+					if(item.name === this.state.nameCountry) {
+						return(
+							<Country
+								deleteCountryFunc={() => this.deleteCountry(index)} 
+								key={index} 
+								data={item} 
+							/>
+						);
+					} else if (this.state.nameCountry === '') {
+						return(
+							<Country
+								deleteCountryFunc={() => this.deleteCountry(index)} 
+								key={index} 
+								data={item} 
+							/>
+						);
+					} 
+				})}
+
+				<div class="content">
+					<div class="form-wrapper">
+						<div class="linker"> 
+						<span class="ring"></span>
+						<span class="ring"></span>
+						<span class="ring"></span>
+						<span class="ring"></span>
+						<span class="ring"></span>
+						</div>
+						<form class="login-form" action="#" method="post">
+						
+						<input type="text" name="password"  value={this.state.nameCountry} onChange={this.handleNameChange} placeholder="Введите название страны"/>
+						{/* <button onClick={this.state.nameCountry}>ВОЙТИ</button> */}
+						</form>
+					</div>
+				</div>
 			</div>
 		);
 	}
