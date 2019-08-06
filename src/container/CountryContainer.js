@@ -2,22 +2,29 @@ import React, { Component } from 'react';
 import Country from '../component/Country';
 import './CountryContainer.css';
 
-class CountryContainer extends Component {
-	// state = {
-	// 	data: [],
-	// 	nameCountry: ""
-		
-	// };
+// function isSearched(searchCountry) {
+// 	return function() {
+// 		return name.toLowerCase().includes(searchCountry.toLowerCase());
+// 	}
+// }
 
-	constructor(){
-		super();
-		this.state = {
-			data: [],
-			nameCountry: '',
+class CountryContainer extends Component {
+	state = {
+		data: [],
+		nameCountry: "",
+	};
+
+	// constructor(){
+	// 	super();
+	// 	this.state = {
+	// 		data: [],
+	// 		nameCountry: '',
 			
-		};
-	}
-	
+	// 	};
+	// }
+
+	//принимает событие
+
 	handleNameChange = (event) => {
 		this.setState({ nameCountry: event.target.value });
 	};
@@ -32,7 +39,7 @@ class CountryContainer extends Component {
 	deleteCountry = (index) => {
 		let dataCountry = this.state.data;
 		dataCountry.splice(index,1);
-		this.setState({data: dataCountry})
+		this.setState({data: dataCountry});
 	}
 
 	onSubmit(e) {
@@ -42,6 +49,12 @@ class CountryContainer extends Component {
     }
 
 	render() {
+		let filteredCountries = this.state.data.filter(
+			(contact) => {
+				return contact.name.toLowerCase().includes(this.state.nameCountry.toLowerCase());
+			}
+		);
+
 		return (
 			<div className="country-list">
 
@@ -63,8 +76,8 @@ class CountryContainer extends Component {
 					</div>
 				</div>
 
-				{this.state.data.map((item, index) => {
-					if(item.name === this.state.nameCountry) {
+				{filteredCountries.map((item, index) => {
+					// if(item.name === this.state.nameCountry) {
 						return(
 							<Country
 								deleteCountryFunc={() => this.deleteCountry(index)} 
@@ -72,15 +85,15 @@ class CountryContainer extends Component {
 								data={item} 
 							/>
 						);
-					} else if (this.state.nameCountry === '') {
-						return(
-							<Country
-								deleteCountryFunc={() => this.deleteCountry(index)} 
-								key={index} 
-								data={item} 
-							/>
-						);
-					} 
+					// } else if (this.state.nameCountry === '') {
+					// 	return(
+					// 		<Country
+					// 			deleteCountryFunc={() => this.deleteCountry(index)} 
+					// 			key={index} 
+					// 			data={item} 
+					// 		/>
+					// 	);
+					// } 
 				})}
 
 				<div class="content">
@@ -92,11 +105,16 @@ class CountryContainer extends Component {
 						<span class="ring"></span>
 						<span class="ring"></span>
 						</div>
-						<form class="login-form" action="#" method="post">
-						
-						<input type="text" name="password"  value={this.state.nameCountry} onChange={this.handleNameChange} placeholder="Введите название страны"/>
+
+						<form class="login-form" action="#" method="post">					
+							<input type="text" name="country"  
+							value={this.state.nameCountry} 
+							onChange={this.handleNameChange}
+							/>
+					
 						{/* <button onClick={this.state.nameCountry}>ВОЙТИ</button> */}
 						</form>
+
 					</div>
 				</div>
 			</div>
